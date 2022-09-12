@@ -1,4 +1,4 @@
-# Cinema
+# CinemaClient
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/danielbgusmao/Cinema/blob/main/LICENCE)
 
