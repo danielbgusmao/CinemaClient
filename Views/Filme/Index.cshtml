@@ -1,0 +1,64 @@
+﻿@model CinemaClient.Models.FilmesViewModel
+@{
+    ViewData["Title"] = "Listagem de Filmes";
+}
+
+<h1>Listagem de filmes</h1>
+
+<p>
+    <input type="button" value="Novo filme" class="btn btn-primary" onclick="document.location.href = 'Filme/Create'" />
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Imagem
+            </th>
+            <th>
+                Título
+            </th>
+            <th>
+                Duração
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Filmes.Count == 0)
+        {
+        <tr>
+            <td colspan="5">Nenum filme cadastrado.</td>
+        </tr>
+        }
+        @foreach (var item in Model.Filmes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @{
+                    var base64 = Convert.ToBase64String(item.Imagem);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                }
+                <img src="@imgsrc" width="100">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Duracao)
+            </td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a role="button" class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a role="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a role="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,81 @@
+﻿@using System.Globalization
+@using CinemaClient.Enums
+@model CinemaClient.Entities.Sessao
+
+@{
+    ViewData["Title"] = "Detalhes da sessão";
+
+    var tipoAnimacao = (TipoAnimacaoEnum)Enum.Parse(typeof(TipoAnimacaoEnum), Model.TipoAnimacao);
+    var tipoAudio = (TipoAudioEnum)Enum.Parse(typeof(TipoAudioEnum), Model.TipoAudio);
+}
+
+<h1>Detalhes da sessão</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Filme.Titulo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Filme.Titulo)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sala.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sala.Nome)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Filme.Imagem)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var base64 = Convert.ToBase64String(Model.Filme.Imagem);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+            }
+            <img src="@imgsrc" width="100">
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd class="col-sm-10">
+            @Convert.ToDateTime(Model.DataInicio).ToString("g", CultureInfo.GetCultureInfo("pt-BR"))
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd class="col-sm-10">
+            @Convert.ToDateTime(Model.DataFim).ToString("g", CultureInfo.GetCultureInfo("pt-BR"))
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoAnimacao)
+        </dt>
+        <dd class="col-sm-10">
+            @tipoAnimacao
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoAudio)
+        </dt>
+        <dd class="col-sm-10">
+            @tipoAudio
+        </dd>
+    </dl>
+</div>
+<div>
+    <input type="button" asp-action="Index" onclick="location.href = '/Sessao/Edit/@Model.Id'" value="Editar" class="btn btn-primary"/>
+    <input type="button" asp-action="Index" onclick="location.href = '/Sessao'" value="Voltar para listagem" class="btn btn-primary"/>
+</div>
+

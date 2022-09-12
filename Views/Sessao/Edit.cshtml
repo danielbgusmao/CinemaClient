@@ -1,0 +1,92 @@
+﻿@model CinemaClient.Models.SessaoViewModel
+@using CinemaClient.Enums
+@using CinemaClient.Models
+
+@{
+    ViewData["Title"] = "Editar sessão";
+}
+
+<h4>Editar sessão</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+            <div class="form-group col-md-6">
+                <label asp-for="FilmeId" class="control-label"></label>
+                @Html.DropDownListFor(Model => Model.FilmeId, new SelectList(ViewBag.Filmes,"Id","Titulo"),"Selecione um filme",htmlAttributes:new{@class = "form-control", @onchange="return CalculaDataFim('DataInicio_div')"})
+                <span asp-validation-for="FilmeId" class="text-danger" id="FilmeId_div"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label asp-for="SalaId" class="control-label"></label>
+                @Html.DropDownListFor(Model => Model.SalaId, new SelectList(ViewBag.Salas,"Id","Nome"),"Selecione uma sala",htmlAttributes:new{@class = "form-control"})
+                <span asp-validation-for="SalaId" class="text-danger" id="SalaId_div"></span>
+            </div>
+            <div class="form-group col-md-8">
+                <div style ="width:200px;float:left;">
+                    <label asp-for="DataInicio" class="control-label"></label>
+                    <input asp-for="DataInicio" class="form-control" onblur="return CalculaDataFim('DataInicio_div'); SugestaoDataInicio('sugestaoDataInicio_div')" />
+                </div>
+                <div style="padding-top:25px;padding-left:210px">
+                    <input type="button" value="Sugestão de data" class="btn btn-primary" onclick="SugestaoDataInicio('sugestaoDataInicio_div')" />
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+                <div style="clear:both">
+                    <span asp-validation-for="DataInicio" class="text-danger" id="DataInicio_div">@Html.Raw(ViewData["msgDataInicio"])</span>
+                </div>
+            </div>
+
+            <div id="sugestaoDataInicio_div" class="col-md-10" style="clear:both"></div>
+            <div class="form-group col-md-8">
+                <div class="form-group" style="width:200px;float:left;">
+                    <label asp-for="DataFim" class="control-label"></label>
+                    <input asp-for="DataFim" class="form-control" disabled />
+                    <span asp-validation-for="DataFim" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-8" style="clear:both">
+                <div class="form-group" style="width:200px;float:left;">
+                    <label asp-for="ValorIngresso" class="control-label"></label>
+                    <input asp-for="ValorIngresso" class="form-control" id="ValorIngresso" onkeyup="formatarMoeda('ValorIngresso')" onblur="formatarMoeda('ValorIngresso')" />
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+                <div style="clear:both">
+                    <span asp-validation-for="ValorIngresso" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-6" style="clear:both">
+                <label asp-for="TipoAnimacao" class="control-label"></label>
+                @Html.DropDownListFor(Model => Model.TipoAnimacao, TipoAnimacaoEnum.Animacao2D.ToSelectList(), "Selecione um tipo de animação",new { @class = "form-control" })
+                <span asp-validation-for="TipoAnimacao" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="TipoAudio" class="control-label"></label>
+                @Html.DropDownListFor(Model => Model.TipoAudio, TipoAudioEnum.Dublado.ToSelectList(), "Selecione um tipo de animação",new { @class = "form-control" })
+                <span asp-validation-for="TipoAudio" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-top:20px">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="button" asp-action="Index" onclick="location.href = '/Sessao'" value="Voltar para listagem" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.onreadystatechange = function () {
+        if (document.readyState == "complete") {
+            //formatarMoeda('ValorIngresso');
+        }
+    }
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

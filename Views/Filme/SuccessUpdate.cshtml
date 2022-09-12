@@ -1,0 +1,24 @@
+﻿@model CinemaClient.Entities.Filme
+
+@{
+    ViewData["Title"] = "Atualizar filme";
+}
+
+<h1>Atualizar filme</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            Filme @Model.Titulo atualizado com sucesso!
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group" style="padding-top:20px">
+            <input type="button" asp-action="Index" onclick="location.href = '/Filme'" value="Voltar para listagem" class="btn btn-primary"/>
+        </div>
+    </div>
+</div>
+

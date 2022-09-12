@@ -1,0 +1,24 @@
+﻿@model CinemaClient.Entities.Sessao
+
+@{
+    ViewData["Title"] = "Atualizar Sessão";
+}
+
+<h1>Atualizar sessão</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            Sessão @Model.Id atualizada com sucesso!
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group" style="padding-top:20px">
+            <input type="button" asp-action="Index" onclick="location.href = '/Sessao'" value="Voltar para listagem" class="btn btn-primary"/>
+        </div>
+    </div>
+</div>
+

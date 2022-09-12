@@ -1,0 +1,47 @@
+﻿@model CinemaClient.Models.SalasViewModel
+@{
+    ViewData["Title"] = "Listagem de Salas";
+}
+
+<h1>Listagem de salas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Quantidade de Assentos
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Salas.Count == 0)
+        {
+        <tr>
+            <td colspan="5">Nenum filme encontrado.</td>
+        </tr>
+        }
+        @foreach (var item in Model.Salas) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeAssentos)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
