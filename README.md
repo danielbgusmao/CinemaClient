@@ -73,5 +73,4 @@ INSERT INTO Usuario (Id, Nome, Email, Senha) VALUES (NEWID(),'Seu nome','seuemai
 
 Daniel Bringel Gusmão.
 
-https://www.linkedin.com/in/daniel-gusmão-a2b2b011/
-
+https://www.linkedin.com/in/danielbgusmao
